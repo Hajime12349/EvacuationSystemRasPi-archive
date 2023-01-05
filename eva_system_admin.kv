@@ -1,0 +1,55 @@
+
+#:kivy 1.11.1
+<MainScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        
+        ColorLabel:
+            size_hint_y: 0.05
+
+        FloatLayout:
+            RoundedButton:
+                text:"通報"
+                size_hint: 0.3,0.24
+                pos_hint:{'center_x':0.25, 'center_y':0.75}
+                on_press: root.on_press_report()
+
+            RoundedButton:
+                text:"履歴"
+                size_hint: 0.3,0.24
+                pos_hint:{'center_x':0.25, 'center_y':0.25}
+                on_press: root.on_press_history()
+    
+<ColorLabel>:
+    canvas.before:
+        Color:
+            rgba: 1 , 0.75 , 0.38 , 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<RoundedButton@Button>
+    background_color:(0,0,0,0)
+    background_normal:''
+    color: 0 , 0 , 0 , 1
+
+    #最低限のフォントサイズ18pt=5.4mm, window_size(px)=display_size(mm)*5
+    font_size: 5.4*5
+
+    text_size: self.width, None
+    halign: 'center'
+    canvas.before:
+        Color:
+            rgba:(1 , 0.75 , 0.38 , 1) if self.state!='down' else (0.6 , 0.45 , 0.22,1) 
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius:[18]

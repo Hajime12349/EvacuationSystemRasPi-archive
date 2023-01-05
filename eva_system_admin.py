@@ -3,12 +3,16 @@ from kivy.app import App
 
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
+from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
+import japanize_kivy
 
 
-Builder.load_file('./evacuation_system.kv')
+Builder.load_file('./eva_system_admin.kv')
 
-class MainScreen(Widget):
+Window.size=(197*5,110*5)
+
+class MainScreen(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -19,6 +23,9 @@ class MainScreen(Widget):
     def on_press_history(self):
         print('history')
 
+class ColorLabel(BoxLayout):
+    pass
+
 class SystemInit(App):
     def __init__(self, **kwargs):
         super(SystemInit, self).__init__(**kwargs)
@@ -26,6 +33,8 @@ class SystemInit(App):
 
     def build(self):
         return MainScreen()
+
+
 
 
 
