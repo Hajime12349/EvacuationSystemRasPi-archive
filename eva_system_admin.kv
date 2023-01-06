@@ -1,6 +1,6 @@
 
 #:kivy 1.11.1
-<MainScreen>:
+<MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
         size: root.size
@@ -11,7 +11,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-        
+
         ColorLabel:
             size_hint_y: 0.05
 
@@ -20,14 +20,78 @@
                 text:"通報"
                 size_hint: 0.3,0.24
                 pos_hint:{'center_x':0.25, 'center_y':0.75}
-                on_press: root.on_press_report()
+                on_press:root.manager.current = 'input'
 
             RoundedButton:
                 text:"履歴"
                 size_hint: 0.3,0.24
                 pos_hint:{'center_x':0.25, 'center_y':0.25}
                 on_press: root.on_press_history()
-    
+
+<InputScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        ColorLabel:
+            size_hint_y: 0.05
+        BoxLayout:
+            orientation:'horizontal'
+            BoxLayout:
+                orientation:'vertical'
+                padding: ('0dp', '10dp', '0dp', '10dp')
+                spacing: '50dp'
+                Spinner:
+                    id:date_time
+                    size_hint_y: 0.1
+                    pos_hint: {'y': 0.25}
+                    text: 'A'
+                    values: 'A', 'B', 'C', 'D', 'E'
+                Spinner:
+                    id:type
+                    size_hint_y: 0.1
+                    pos_hint: {'y': 0.5}
+                    text: 'A'
+                    values: 'A', 'B', 'C', 'D', 'E'
+                
+                Spinner:
+                    id:area
+                    size_hint_y: 0.1
+                    pos_hint: {'y': 0.75}
+                    text: 'A'
+                    values: 'A', 'B', 'C', 'D', 'E'
+                
+                Spinner:
+                    id:rmarks
+                    size_hint_y: 0.1
+                    pos_hint: {'y': 1}
+                    text: 'A'
+                    values: 'A', 'B', 'C', 'D', 'E'
+
+            Label:
+                text: "text"
+        FloatLayout:
+            size_hint_y:0.1
+            RoundedButton:
+                text:"戻る"
+                size_hint: 0.1,0.5
+                pos_hint:{'center_x':0.1, 'center_y':0.5}
+                #on_press:root.manager.current = 'input'
+
+            RoundedButton:
+                text:"確認"
+                size_hint: 0.1,0.5
+                pos_hint:{'center_x':0.9, 'center_y':0.5}
+                #on_press: root.on_press_history()
+
+
 <ColorLabel>:
     canvas.before:
         Color:
@@ -50,6 +114,6 @@
         Color:
             rgba:(1 , 0.75 , 0.38 , 1) if self.state!='down' else (0.6 , 0.45 , 0.22,1) 
         RoundedRectangle:
-            size: self.size
-            pos: self.pos
+            size:self.size
+            pos:self.pos
             radius:[18]

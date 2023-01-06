@@ -1,18 +1,20 @@
-#import japanize_kivy
+import japanize_kivy
 from kivy.app import App
 
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
-import japanize_kivy
+from kivy.uix.screenmanager import ScreenManager,Screen,NoTransition
+from kivy.uix.button import Button
+from kivy.graphics import Color,RoundedRectangle
 
 
 Builder.load_file('./eva_system_admin.kv')
 
 Window.size=(197*5,110*5)
 
-class MainScreen(BoxLayout):
+class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
@@ -23,8 +25,14 @@ class MainScreen(BoxLayout):
     def on_press_history(self):
         print('history')
 
+class InputScreen(Screen):
+    pass
+
 class ColorLabel(BoxLayout):
     pass
+
+
+
 
 class SystemInit(App):
     def __init__(self, **kwargs):
@@ -32,7 +40,10 @@ class SystemInit(App):
         self.title = 'Evacuation System'
 
     def build(self):
-        return MainScreen()
+        sm = ScreenManager(transition=NoTransition())
+        sm.add_widget(MenuScreen(name='menu'))
+        sm.add_widget(InputScreen(name='input'))
+        return sm
 
 
 
