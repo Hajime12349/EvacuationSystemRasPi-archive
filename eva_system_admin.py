@@ -8,6 +8,8 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager,Screen,NoTransition
 from kivy.uix.button import Button
 from kivy.graphics import Color,RoundedRectangle
+from kivy.uix.spinner import Spinner, SpinnerOption
+from kivy.uix.dropdown import DropDown
 
 
 Builder.load_file('./eva_system_admin.kv')

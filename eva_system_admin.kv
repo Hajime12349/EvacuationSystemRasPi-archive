@@ -1,5 +1,51 @@
 
 #:kivy 1.11.1
+
+
+<ColorLabel>:
+    canvas.before:
+        Color:
+            rgba: 1 , 0.75 , 0.38 , 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<RoundedButton@Button>
+    background_color:(0,0,0,0)
+    background_normal:''
+    color: 0 , 0 , 0 , 1
+
+    #最低限のフォントサイズ18pt=5.4mm, window_size(px)=display_size(mm)*5
+    font_size: 5.4*5
+
+    text_size: self.width, None
+    halign: 'center'
+    canvas.before:
+        Color:
+            rgba:(1 , 0.75 , 0.38 , 1) if self.state!='down' else (0.6 , 0.45 , 0.22,1)
+        RoundedRectangle:
+            size:self.size
+            pos:self.pos
+            radius:[18]
+
+
+<SpinnerOption>
+    background_normal:''
+    background_color: (230/250 , 230/250 , 230/250 , 1)
+    color:0,0,0,1
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            rectangle: self.x+1,self.y+1,self.width-1,self.height-1
+
+<CustomSpinner@Spinner>
+    size_hint_y:0.05
+    background_normal:''
+    color: 0 , 0 , 0 , 1
+    background_color:(180/250 , 180/250 , 180/250 , 1)
+
+#スタート画面（メニュー）
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
@@ -28,6 +74,7 @@
                 pos_hint:{'center_x':0.25, 'center_y':0.25}
                 on_press: root.on_press_history()
 
+#通報入力画面
 <InputScreen>:
     BoxLayout:
         orientation: 'vertical'
@@ -46,34 +93,60 @@
             orientation:'horizontal'
             BoxLayout:
                 orientation:'vertical'
-                padding: ('0dp', '10dp', '0dp', '10dp')
-                spacing: '50dp'
-                Spinner:
-                    id:date_time
-                    size_hint_y: 0.1
-                    pos_hint: {'y': 0.25}
-                    text: 'A'
-                    values: 'A', 'B', 'C', 'D', 'E'
-                Spinner:
-                    id:type
-                    size_hint_y: 0.1
-                    pos_hint: {'y': 0.5}
-                    text: 'A'
-                    values: 'A', 'B', 'C', 'D', 'E'
-                
-                Spinner:
-                    id:area
-                    size_hint_y: 0.1
-                    pos_hint: {'y': 0.75}
-                    text: 'A'
-                    values: 'A', 'B', 'C', 'D', 'E'
-                
-                Spinner:
-                    id:rmarks
-                    size_hint_y: 0.1
-                    pos_hint: {'y': 1}
-                    text: 'A'
-                    values: 'A', 'B', 'C', 'D', 'E'
+                padding: ('0dp', '10dp', '0dp', '20dp')
+                spacing: '30dp'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'災害発生日時'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:date_time
+                        pos_hint: {'y': 0.25}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'災害の種類とレベル'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:type
+                        pos_hint: {'y': 0.5}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'対象地域'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:area
+                        pos_hint: {'y': 0.75}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'備考'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:rmarks
+                        pos_hint: {'y': 1}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
 
             Label:
                 text: "text"
@@ -81,39 +154,29 @@
             size_hint_y:0.1
             RoundedButton:
                 text:"戻る"
-                size_hint: 0.1,0.5
+                size_hint: 0.1,0.8
                 pos_hint:{'center_x':0.1, 'center_y':0.5}
-                #on_press:root.manager.current = 'input'
+
+                #override
+                canvas.before:
+                    RoundedRectangle:
+                        size:self.size
+                        pos:self.pos
+                        radius:[10]
+
+                on_press:root.manager.current = 'menu'
 
             RoundedButton:
                 text:"確認"
-                size_hint: 0.1,0.5
+                size_hint: 0.1,0.8
                 pos_hint:{'center_x':0.9, 'center_y':0.5}
                 #on_press: root.on_press_history()
 
+                #override
+                canvas.before:
+                    RoundedRectangle:
+                        size:self.size
+                        pos:self.pos
+                        radius:[10]
 
-<ColorLabel>:
-    canvas.before:
-        Color:
-            rgba: 1 , 0.75 , 0.38 , 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
 
-<RoundedButton@Button>
-    background_color:(0,0,0,0)
-    background_normal:''
-    color: 0 , 0 , 0 , 1
-
-    #最低限のフォントサイズ18pt=5.4mm, window_size(px)=display_size(mm)*5
-    font_size: 5.4*5
-
-    text_size: self.width, None
-    halign: 'center'
-    canvas.before:
-        Color:
-            rgba:(1 , 0.75 , 0.38 , 1) if self.state!='down' else (0.6 , 0.45 , 0.22,1) 
-        RoundedRectangle:
-            size:self.size
-            pos:self.pos
-            radius:[18]
