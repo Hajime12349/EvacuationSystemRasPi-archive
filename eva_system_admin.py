@@ -30,8 +30,17 @@ class MenuScreen(Screen):
 class InputScreen(Screen):
     pass
 
+class CheckScreen(Screen):
+    pass
+
+class ResultScreen(Screen):
+    pass
+
+
 class ColorLabel(BoxLayout):
     pass
+
+
 
 
 
@@ -45,6 +54,8 @@ class SystemInit(App):
         sm = ScreenManager(transition=NoTransition())
         sm.add_widget(MenuScreen(name='menu'))
         sm.add_widget(InputScreen(name='input'))
+        sm.add_widget(CheckScreen(name='check'))
+        sm.add_widget(ResultScreen(name='result'))
         return sm
 
 

@@ -5,7 +5,7 @@
 <ColorLabel>:
     canvas.before:
         Color:
-            rgba: 1 , 0.75 , 0.38 , 1
+            rgba: 1 , 0.75 , 0.38 , 1 #ffbf60
         Rectangle:
             pos: self.pos
             size: self.size
@@ -22,6 +22,7 @@
     halign: 'center'
     canvas.before:
         Color:
+            #if down #ffbf60 else #997238
             rgba:(1 , 0.75 , 0.38 , 1) if self.state!='down' else (0.6 , 0.45 , 0.22,1)
         RoundedRectangle:
             size:self.size
@@ -31,7 +32,7 @@
 
 <SpinnerOption>
     background_normal:''
-    background_color: (230/250 , 230/250 , 230/250 , 1)
+    background_color: (0.9,0.9,0.9, 1) #e5e5e5
     color:0,0,0,1
     canvas.before:
         Color:
@@ -43,7 +44,7 @@
     size_hint_y:0.05
     background_normal:''
     color: 0 , 0 , 0 , 1
-    background_color:(180/250 , 180/250 , 180/250 , 1)
+    background_color:(0.7,0.7,0.7 , 1) #b2b2b2
 
 #スタート画面（メニュー）
 <MenuScreen>:
@@ -66,13 +67,13 @@
                 text:"通報"
                 size_hint: 0.3,0.24
                 pos_hint:{'center_x':0.25, 'center_y':0.75}
-                on_press:root.manager.current = 'input'
+                on_release:root.manager.current = 'input'
 
             RoundedButton:
                 text:"履歴"
                 size_hint: 0.3,0.24
                 pos_hint:{'center_x':0.25, 'center_y':0.25}
-                on_press: root.on_press_history()
+                on_release: root.on_release_history()
 
 #通報入力画面
 <InputScreen>:
@@ -89,6 +90,7 @@
 
         ColorLabel:
             size_hint_y: 0.05
+
         BoxLayout:
             orientation:'horizontal'
             BoxLayout:
@@ -148,8 +150,17 @@
                         text: 'A'
                         values: 'A', 'B', 'C', 'D', 'E'
 
-            Label:
-                text: "text"
+            BoxLayout:
+                BoxLayout:
+                    padding:10,10,10,10
+                    Label:
+                        canvas.before:
+                            Color:
+                                rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
+                            Rectangle:
+                                pos: self.pos
+                                size: self.size
+
         FloatLayout:
             size_hint_y:0.1
             RoundedButton:
@@ -164,13 +175,12 @@
                         pos:self.pos
                         radius:[10]
 
-                on_press:root.manager.current = 'menu'
+                on_release:root.manager.current = 'menu'
 
             RoundedButton:
                 text:"確認"
                 size_hint: 0.1,0.8
                 pos_hint:{'center_x':0.9, 'center_y':0.5}
-                #on_press: root.on_press_history()
 
                 #override
                 canvas.before:
@@ -178,5 +188,117 @@
                         size:self.size
                         pos:self.pos
                         radius:[10]
+
+                on_release: root.manager.current = 'check'
+
+
+#通報入力確認画面
+<CheckScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        ColorLabel:
+            size_hint_y: 0.05
+
+        BoxLayout:
+            orientation:'horizontal'
+            BoxLayout:
+                padding:10,10,10,10
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+            BoxLayout:
+                padding:10,10,10,10
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+        FloatLayout:
+            size_hint_y:0.1
+            RoundedButton:
+                text:"戻る"
+                size_hint: 0.1,0.8
+                pos_hint:{'center_x':0.1, 'center_y':0.5}
+
+                #override
+                canvas.before:
+                    RoundedRectangle:
+                        size:self.size
+                        pos:self.pos
+                        radius:[10]
+
+                on_release:root.manager.current = 'input'
+
+            RoundedButton:
+                text:"確認"
+                size_hint: 0.1,0.8
+                pos_hint:{'center_x':0.9, 'center_y':0.5}
+
+                #override
+                canvas.before:
+                    RoundedRectangle:
+                        size:self.size
+                        pos:self.pos
+                        radius:[10]
+
+                on_release: root.manager.current = 'result'
+
+<ResultScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        ColorLabel:
+            size_hint_y: 0.05
+
+        BoxLayout:
+            BoxLayout:
+                padding:10,10,10,10
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+        FloatLayout:
+            size_hint_y:0.1
+            RoundedButton:
+                text:"トップへ"
+                size_hint: 0.15,0.8
+                pos_hint:{'center_x':0.1, 'center_y':0.5}
+
+                #override
+                canvas.before:
+                    RoundedRectangle:
+                        size:self.size
+                        pos:self.pos
+                        radius:[10]
+
+                on_release:root.manager.current = 'menu'
 
 
