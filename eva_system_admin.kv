@@ -57,7 +57,7 @@
         background_normal:''
         background_down:''
         color: 0 , 0 , 0 , 1
-        text:'Click here and you\'ll see a preview'
+        text:"Click here and you'll see a preview"
         #if down #cccccc else #7f7f7f
         background_color:(0.8, 0.8 , 0.8 , 1) if self.state!='down' else (0.5,0.5,0.5, 1)
         canvas.before:
@@ -282,7 +282,9 @@
                         pos:self.pos
                         radius:[10]
 
-                on_release: root.manager.current = 'result'
+                on_release:
+                    root.on_press_send()
+                    root.manager.current = 'result'
 
 <ResultScreen>
     BoxLayout:

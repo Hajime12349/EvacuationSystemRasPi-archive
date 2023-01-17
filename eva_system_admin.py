@@ -1,3 +1,4 @@
+import serial
 import japanize_kivy
 from kivy.app import App
 
@@ -12,9 +13,19 @@ from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.dropdown import DropDown
 
 
-Builder.load_file('./eva_system_admin.kv')
+def generate_send_data(
+    date_str:str,
+    type_num:int,
+    level_num:int,
+    area_num:int,
+    detail:str
+    ):
 
-Window.size=(197*5,110*5)
+    ser=serial.Serial()
+    send_data_str=f'{date_str} {type_num} {level_num} {area_num} {detail}'
+    send_data_bin=send_data_str.encode('shift_jis')
+    ser.write(send_data_bin)
+
 
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
@@ -30,9 +41,10 @@ class MenuScreen(Screen):
 class InputScreen(Screen):
     def on_press_confirm(self):
         print('conf')
-    pass
 
 class CheckScreen(Screen):
+    def on_press_send(self):
+        print('com')
     pass
 
 class ResultScreen(Screen):
@@ -70,4 +82,6 @@ class SystemInit(App):
 
 # メインの定義
 if __name__ == '__main__':
+    Builder.load_file('./eva_system_admin.kv')
+    Window.size=(197*5,110*5)
     SystemInit().run()
