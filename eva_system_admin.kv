@@ -32,7 +32,9 @@
 
 <SpinnerOption>
     background_normal:''
-    background_color: (0.9,0.9,0.9, 1) #e5e5e5
+    background_down:''
+    #if down e5e5e5 else 7f7f7f
+    background_color: (0.9,0.9,0.9, 1) if self.state!='down' else (0.5,0.5,0.5, 1)
     color:0,0,0,1
     canvas.before:
         Color:
@@ -43,8 +45,29 @@
 <CustomSpinner@Spinner>
     size_hint_y:0.05
     background_normal:''
+    background_down:''
     color: 0 , 0 , 0 , 1
-    background_color:(0.7,0.7,0.7 , 1) #b2b2b2
+    #if down b2b2b2 else 7f7f7f
+    background_color:(0.7,0.7,0.7, 1) if self.state!='down' else (0.5,0.5,0.5, 1)
+
+<GridRectangle@GridLayout>
+    raws:10
+    cols:1
+    Button:
+        background_normal:''
+        background_down:''
+        color: 0 , 0 , 0 , 1
+        text:'Click here and you\'ll see a preview'
+        #if down #cccccc else #7f7f7f
+        background_color:(0.8, 0.8 , 0.8 , 1) if self.state!='down' else (0.5,0.5,0.5, 1)
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgba: 0, 0, 0, 1
+            Line:
+                rectangle: self.x+1,self.y+1,self.width-1,self.height-1
 
 #スタート画面（メニュー）
 <MenuScreen>:
@@ -73,7 +96,7 @@
                 text:"履歴"
                 size_hint: 0.3,0.24
                 pos_hint:{'center_x':0.25, 'center_y':0.25}
-                on_release: root.on_release_history()
+                on_release: root.manager.current = 'history'
 
 #通報入力画面
 <InputScreen>:
@@ -189,7 +212,9 @@
                         pos:self.pos
                         radius:[10]
 
-                on_release: root.manager.current = 'check'
+                on_release:
+                    root.on_press_confirm()
+                    root.manager.current = 'check'
 
 
 #通報入力確認画面
@@ -300,5 +325,76 @@
                         radius:[10]
 
                 on_release:root.manager.current = 'menu'
+
+#履歴画面
+<HistoryScreen>
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.size
+
+        canvas.before:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        ColorLabel:
+            size_hint_y: 0.05
+
+        BoxLayout:
+            orientation:'horizontal'
+            BoxLayout:
+                padding:10,10,10,10
+                GridLayout:
+                    raws:10
+                    cols:1
+                    GridRectangle:
+                        id:G1
+                    GridRectangle:
+                        id:G2
+                    GridRectangle:
+                        id:G3
+                    GridRectangle:
+                        id:G4
+                    GridRectangle:
+                        id:G5
+                    GridRectangle:
+                        id:G6
+                    GridRectangle:
+                        id:G7
+                    GridRectangle:
+                        id:G8
+                    GridRectangle:
+                        id:G9
+                    GridRectangle:
+                        id:G10
+            BoxLayout:
+                padding:10,10,10,10
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
+
+        FloatLayout:
+            size_hint_y:0.1
+            RoundedButton:
+                text:"戻る"
+                size_hint: 0.1,0.8
+                pos_hint:{'center_x':0.1, 'center_y':0.5}
+
+                #override
+                canvas.before:
+                    RoundedRectangle:
+                        size:self.size
+                        pos:self.pos
+                        radius:[10]
+
+                on_release:root.manager.current = 'menu'
+
+
 
 

@@ -20,14 +20,16 @@ class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    # ボタン押下時に呼ばれる
-    def on_press_report(self):
-        print('report')
+    # # ボタン押下時に呼ばれる
+    # def on_press_report(self):
+    #     print('report')
 
-    def on_press_history(self):
-        print('history')
+    # def on_press_history(self):
+    #     print('history')
 
 class InputScreen(Screen):
+    def on_press_confirm(self):
+        print('conf')
     pass
 
 class CheckScreen(Screen):
@@ -36,6 +38,8 @@ class CheckScreen(Screen):
 class ResultScreen(Screen):
     pass
 
+class HistoryScreen(Screen):
+    pass
 
 class ColorLabel(BoxLayout):
     pass
@@ -56,6 +60,7 @@ class SystemInit(App):
         sm.add_widget(InputScreen(name='input'))
         sm.add_widget(CheckScreen(name='check'))
         sm.add_widget(ResultScreen(name='result'))
+        sm.add_widget(HistoryScreen(name='history'))
         return sm
 
 
