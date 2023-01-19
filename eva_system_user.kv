@@ -45,37 +45,94 @@
     color: 0 , 0 , 0 , 1
     background_color:(180/250 , 180/250 , 180/250 , 1)
 
-#スタート画面（メニュー）
+<GridRectangle@GridLayout>
+    raws:10
+    cols:1
+    Button:
+        background_normal:''
+        background_down:''
+        color: 0 , 0 , 0 , 1
+        text:"Click here and you'll see a preview"
+        #if down #cccccc else #7f7f7f
+        background_color:(0.8, 0.8 , 0.8 , 1) if self.state!='down' else (0.5,0.5,0.5, 1)
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgba: 0, 0, 0, 1
+            Line:
+                rectangle: self.x+1,self.y+1,self.width-1,self.height-1
+
+
+#ユーザ画面（メニュー）
 <MenuScreen>:
     BoxLayout:
         orientation: 'vertical'
         size: root.size
-
-        canvas.before:
-            Color:
-                rgba: 1, 1, 1, 1
-            Rectangle:
-                pos: self.pos
-                size: self.size
-
+        
         ColorLabel:
             size_hint_y: 0.05
+        
+        BoxLayout:
+            orientation: 'vertical'
+            size: root.size
+            padding:40,0,40,0
+            size_hint_y: 2.5
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            
+                
+            Label:
+                id:'title'
+                text:'タイトル'
+                font_size: 5.4*5 
+                size_hint_y: 0.3
+                color:(0,0,0,1)
+            
+            BoxLayout:
+                orientation:'vertical'
+                size_hint_y: 1
+                padding: 10,10,10,10
+                canvas.before:
+                    Color:
+                        rgba: 0,0,0,0.15
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
+                Label:
+                    id:'content'
+                    text_size: self.size
+                    text:'内容'
+                    halign: 'left'
+                    valign: 'top'
+                    font_size: 5.4*4
+                    size_hint_y: 1
+                    color:(0,0,0,1)
+            
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: 0.5
+            padding: 0,10,0,0
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            FloatLayout:
+                RoundedButton:
+                    text:"履歴"
+                    size_hint: 0.2,0.7
+                    pos_hint:{'center_x':0.5, 'center_y':0.5}
+                    on_press: root.manager.current = 'userHistory'
 
-        FloatLayout:
-            RoundedButton:
-                text:"通報"
-                size_hint: 0.3,0.24
-                pos_hint:{'center_x':0.25, 'center_y':0.75}
-                on_press:root.on_press_report()
-
-            RoundedButton:
-                text:"履歴"
-                size_hint: 0.3,0.24
-                pos_hint:{'center_x':0.25, 'center_y':0.25}
-                on_press: root.manager.current = 'history'
-
-#通報入力画面
-<InputScreen>:
+#ユーザ履歴画面
+<UserHistoryScreen>:
     BoxLayout:
         orientation: 'vertical'
         size: root.size
@@ -89,67 +146,44 @@
 
         ColorLabel:
             size_hint_y: 0.05
+
         BoxLayout:
             orientation:'horizontal'
             BoxLayout:
-                orientation:'vertical'
-                padding: ('0dp', '10dp', '0dp', '20dp')
-                spacing: '30dp'
-                BoxLayout:
-                    orientation:'vertical'
-                    padding:10,0,10,0
-                    Label:
-                        text:'災害発生日時'
-                        color:(0,0,0,1)
-                        size_hint_y:0.05
-                        font_size: 5.4*5
-                    CustomSpinner:
-                        id:date_time
-                        pos_hint: {'y': 0.25}
-                        text: 'A'
-                        values: 'A', 'B', 'C', 'D', 'E'
-                BoxLayout:
-                    orientation:'vertical'
-                    padding:10,0,10,0
-                    Label:
-                        text:'災害の種類とレベル'
-                        color:(0,0,0,1)
-                        size_hint_y:0.05
-                        font_size: 5.4*5
-                    CustomSpinner:
-                        id:type
-                        pos_hint: {'y': 0.5}
-                        text: 'A'
-                        values: 'A', 'B', 'C', 'D', 'E'
-                BoxLayout:
-                    orientation:'vertical'
-                    padding:10,0,10,0
-                    Label:
-                        text:'対象地域'
-                        color:(0,0,0,1)
-                        size_hint_y:0.05
-                        font_size: 5.4*5
-                    CustomSpinner:
-                        id:area
-                        pos_hint: {'y': 0.75}
-                        text: 'A'
-                        values: 'A', 'B', 'C', 'D', 'E'
-                BoxLayout:
-                    orientation:'vertical'
-                    padding:10,0,10,0
-                    Label:
-                        text:'備考'
-                        color:(0,0,0,1)
-                        size_hint_y:0.05
-                        font_size: 5.4*5
-                    CustomSpinner:
-                        id:rmarks
-                        pos_hint: {'y': 1}
-                        text: 'A'
-                        values: 'A', 'B', 'C', 'D', 'E'
+                padding:10,10,10,10
+                GridLayout:
+                    raws:10
+                    cols:1
+                    GridRectangle:
+                        id:G1
+                    GridRectangle:
+                        id:G2
+                    GridRectangle:
+                        id:G3
+                    GridRectangle:
+                        id:G4
+                    GridRectangle:
+                        id:G5
+                    GridRectangle:
+                        id:G6
+                    GridRectangle:
+                        id:G7
+                    GridRectangle:
+                        id:G8
+                    GridRectangle:
+                        id:G9
+                    GridRectangle:
+                        id:G10
+            BoxLayout:
+                padding:10,10,10,10
+                Label:
+                    canvas.before:
+                        Color:
+                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
+                        Rectangle:
+                            pos: self.pos
+                            size: self.size
 
-            Label:
-                text: "text"
         FloatLayout:
             size_hint_y:0.1
             RoundedButton:
@@ -164,27 +198,4 @@
                         pos:self.pos
                         radius:[10]
 
-                on_press:root.manager.current = 'menu'
-
-            RoundedButton:
-                text:"確認"
-                size_hint: 0.1,0.8
-                pos_hint:{'center_x':0.9, 'center_y':0.5}
-                #on_press: root.on_press_history()
-
-                #override
-                canvas.before:
-                    RoundedRectangle:
-                        size:self.size
-                        pos:self.pos
-                        radius:[10]
-
-<InputScreen>:
-    BoxLayout:
-        orientation: 'vertical'
-        size: root.size
-        
-        
-        ColorLabel:
-            size_hint_y: 0.05
-    
+                on_release:root.manager.current = 'menu'

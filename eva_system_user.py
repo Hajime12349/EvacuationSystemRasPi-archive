@@ -12,10 +12,6 @@ from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.dropdown import DropDown
 
 
-Builder.load_file('./eva_system_user.kv')
-
-Window.size=(197*5,110*5)
-
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -27,7 +23,7 @@ class MenuScreen(Screen):
     def on_press_history(self):
         print('history')
 
-class HistoryScreen(Screen):
+class UserHistoryScreen(Screen):
     pass
 
 class ColorLabel(BoxLayout):
@@ -42,10 +38,12 @@ class SystemInit(App):
     def build(self):
         sm = ScreenManager(transition=NoTransition())
         sm.add_widget(MenuScreen(name='menu'))
-        sm.add_widget(HistoryScreen(name='history'))
+        sm.add_widget(UserHistoryScreen(name='userHistory'))
         return sm
 
 
 # メインの定義
 if __name__ == '__main__':
+    Builder.load_file('./eva_system_user.kv')
+    Window.size=(197*5,110*5)
     SystemInit().run()
