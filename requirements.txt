@@ -1,3 +1,4 @@
+autopep8==2.0.1
 certifi==2022.9.24
 charset-normalizer==2.0.12
 docutils==0.18.1
@@ -8,8 +9,11 @@ kivy-deps.angle==0.3.0
 kivy-deps.glew==0.3.0
 kivy-deps.sdl2==0.3.1
 Kivy-Garden==0.1.5
+pycodestyle==2.10.0
 Pygments==2.13.0
 pypiwin32==223
+pyserial==3.5
 pywin32==305
 requests==2.27.1
+tomli==2.0.1
 urllib3==1.26.13

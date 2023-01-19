@@ -1,4 +1,5 @@
 import serial
+
 import japanize_kivy
 from kivy.app import App
 
