@@ -24,8 +24,9 @@ def generate_send_data(
 
     ser=serial.Serial()
     send_data_str=f'{date_str} {type_num} {level_num} {area_num} {detail}'
-    send_data_bin=send_data_str.encode('shift_jis')
-    ser.write(send_data_bin)
+    #send_data_bin=send_data_str.encode('shift_jis')
+    #ser.write(send_data_bin)
+    return send_data_str
 
 
 class MenuScreen(Screen):
@@ -40,11 +41,19 @@ class MenuScreen(Screen):
     #     print('history')
 
 class InputScreen(Screen):
+    send_data=''
     def on_press_confirm(self):
-        print('conf')
+        print(self.ids['date_time'].text)
+    def get_data(self):
+        return send_data
+
 
 class CheckScreen(Screen):
+
     def on_press_send(self):
+        input=InputScreen()
+        send_data=input.get_data()
+        #Serial送信開発中
         print('com')
     pass
 
