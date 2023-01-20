@@ -1,5 +1,3 @@
-import serial
-
 import japanize_kivy
 from kivy.app import App
 
@@ -12,6 +10,8 @@ from kivy.uix.button import Button
 from kivy.graphics import Color,RoundedRectangle
 from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.dropdown import DropDown
+
+from Utils.srial_com import SrialComm
 
 
 def generate_send_data(
@@ -53,7 +53,7 @@ class CheckScreen(Screen):
     def on_press_send(self):
         input=InputScreen()
         send_data=input.get_data()
-        #Serial送信開発中
+
         print('com')
     pass
 

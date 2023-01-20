@@ -7,7 +7,7 @@ import threading
 """
 シリアル通信クラス
 """
-class SampleComm:
+class SrialComm:
     # 初期化
     def __init__(self):
         # シリアルを開く
@@ -92,7 +92,7 @@ class SampleComm:
 
 if __name__=='__main__':
     # シリアルを開く
-    comm = SampleComm()
+    comm = SrialComm()
     # PORTNAME='COM5'
     # comm.open(PORTNAME, '115200')
     # COMMAND='tcps 2001:db8::34'
