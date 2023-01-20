@@ -137,12 +137,25 @@
                     orientation:'vertical'
                     padding:10,0,10,0
                     Label:
-                        text:'災害の種類とレベル'
+                        text:'災害の種類'
                         color:(0,0,0,1)
                         size_hint_y:0.05
                         font_size: 5.4*5
                     CustomSpinner:
                         id:type
+                        pos_hint: {'y': 0.5}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'災害のレベル'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:level
                         pos_hint: {'y': 0.5}
                         text: 'A'
                         values: 'A', 'B', 'C', 'D', 'E'

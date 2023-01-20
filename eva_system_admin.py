@@ -22,7 +22,7 @@ def generate_send_data(
     detail:str
     ):
 
-    ser=serial.Serial()
+    #ser=srial.Serial()
     send_data_str=f'{date_str} {type_num} {level_num} {area_num} {detail}'
     #send_data_bin=send_data_str.encode('shift_jis')
     #ser.write(send_data_bin)
@@ -43,9 +43,15 @@ class MenuScreen(Screen):
 class InputScreen(Screen):
     send_data=''
     def on_press_confirm(self):
-        print(self.ids['date_time'].text)
+        self.send_data=generate_send_data(
+        self.ids['date_time'].text,
+        self.ids['type'].text,
+        self.ids['level'].text,
+        self.ids['area'].text,
+        self.ids['rmarks'].text)
+        print(self.send_data)
     def get_data(self):
-        return send_data
+        return self.send_data
 
 
 class CheckScreen(Screen):
@@ -54,7 +60,10 @@ class CheckScreen(Screen):
         input=InputScreen()
         send_data=input.get_data()
 
-        print('com')
+        srial=SrialComm()
+        srial.open()
+        srial.send(send_data)
+        print('end of sending')
     pass
 
 class ResultScreen(Screen):

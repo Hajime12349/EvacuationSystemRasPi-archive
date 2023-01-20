@@ -17,8 +17,6 @@ class SrialComm:
         self.recvData = bytearray()
         # イベント生成
         self.event = threading.Event()
-        PORTNAME='COM5'
-        self.open(PORTNAME, '115200')
 
     # データ受信待ち(タイムアウト付き[sec])
     def recv(self, timeout=3):
@@ -72,7 +70,10 @@ class SrialComm:
         self.event.set()
 
     # シリルポートオープン
-    def open(self, tty, baud='115200'):
+    def open(self):
+        tty='COM5'
+        baud='115200'
+        comm=None
         try:
             self.comm = serial.Serial(tty, baud, timeout=0.1)
             self.isPortOpen = True
