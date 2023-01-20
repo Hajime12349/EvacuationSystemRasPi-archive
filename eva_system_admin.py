@@ -11,7 +11,7 @@ from kivy.graphics import Color,RoundedRectangle
 from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.dropdown import DropDown
 
-from Utils.srial_com import SrialComm
+from Utils.srial_comm import SrialComm
 
 
 def generate_send_data(
