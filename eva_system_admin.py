@@ -102,5 +102,7 @@ class SystemInit(App):
 # メインの定義
 if __name__ == '__main__':
     Builder.load_file('./eva_system_admin.kv')
-    Window.size=(197*5,110*5)
+    #Window.size=(197*5,110*5)
+    Window.size=(1920,1080)
+    Window.fullscreen = True
     SystemInit().run()
