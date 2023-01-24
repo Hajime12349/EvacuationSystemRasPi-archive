@@ -10,18 +10,13 @@ from kivy.uix.button import Button
 from kivy.graphics import Color,RoundedRectangle
 from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.dropdown import DropDown
-
+from Utils.srial_comm import SrialComm
 
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    # ボタン押下時に呼ばれる
-    def on_press_report(self):
-        print('report')
-
-    def on_press_history(self):
-        print('history')
+    
 
 class UserHistoryScreen(Screen):
     pass
@@ -34,6 +29,7 @@ class SystemInit(App):
     def __init__(self, **kwargs):
         super(SystemInit, self).__init__(**kwargs)
         self.title = 'Evacuation System'
+        
 
     def build(self):
         sm = ScreenManager(transition=NoTransition())
