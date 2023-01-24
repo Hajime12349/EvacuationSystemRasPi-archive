@@ -23,7 +23,7 @@ def generate_send_data(
     ):
 
     #ser=srial.Serial()
-    send_data_str=f'{date_str} {type_num} {level_num} {area_num} {detail}:end'
+    send_data_str=f'{date_str}:{type_num}:{level_num}:{area_num}:{detail}:end'
     #send_data_bin=send_data_str.encode('shift_jis')
     #ser.write(send_data_bin)
     return send_data_str
@@ -62,7 +62,10 @@ class CheckScreen(Screen):
         send_data=input.get_data()
 
         srial=SrialComm()
-        srial.open()
+        PORTNAME = 'COM5'
+        srial.open(PORTNAME)
+        # @check
+        # バイナリに変換しなくても送信可能？また、この場合受信はどんなデータになる？
         srial.send(send_data)
         print('end of sending')
     pass
