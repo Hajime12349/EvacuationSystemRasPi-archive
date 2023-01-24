@@ -18,35 +18,41 @@ class MenuScreen(Screen):
         super().__init__(**kwargs)
     
     def recvData(self):
+        # @check
         # 別スレッドで走らせる必要がありそう。
         # sc = SrialComm()
         # PORTNAME='COM5'
         # sc.open(PORTNAME)
         while(1):
-            res, data = "test","data"
-            # res,data = sc.recv(5)
+            res, bdata = "test","data".encode()
+            # res,bdata = sc.recv(5)
             # 末尾が:endかどうか
-            print(res,data)
+            print(res,bdata)
             # @check
             # :endはバイナリでくるからそっちで判定
-            if data[-4:]==":end":
+            if bdata[-4:]==";end".encode():
                 # @check
                 # ここで復元する
+                data = bdata.decode()
                 print(res,data)
+                self.applyData(data)
             time.sleep(0.1)
 
     
-    def applyData(self):
+    def applyData(self,data):
         # データの抽出と加工↓
-        # data = function()
-        data = "date:type:level:area:detail:end"
-        dataList = data.split(":")
+        # test data------------------
+        data = "date;type;level;area;detail;end"
+        dataList = data.split(";")
+        # test data------------------
+        
+        # @check
         # 文章は要検討（的場に相談）
         title = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
-        content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n{dataList[4]}"
+        content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n詳細は、{dataList[4]}"
         # データの抽出と加工↑
-        self.ids.title.text = ''
-        self.ids.content.text = ''
+        self.ids.title.text = title
+        self.ids.content.text = content
     
 
 class UserHistoryScreen(Screen):
@@ -59,6 +65,8 @@ class ColorLabel(BoxLayout):
 class SystemInit(App):
     def __init__(self, **kwargs):
         super(SystemInit, self).__init__(**kwargs)
+        # @check
+        # 何も考えてなかったけど変えた方がいいかも
         self.title = 'Evacuation System'
         
 
