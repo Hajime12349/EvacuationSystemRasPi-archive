@@ -59,14 +59,16 @@ class CheckScreen(Screen):
 
     def on_press_send(self):
         input=InputScreen()
-        send_data=input.get_data()
+        send_data=input.get_data().encode('shift_jis').hex()
 
         srial=SrialComm()
         PORTNAME = 'COM5'
         srial.open(PORTNAME)
+        COMMAND='tcps 2001:db8::34'
         # @check
         # バイナリに変換しなくても送信可能？また、この場合受信はどんなデータになる？
-        srial.send(send_data)
+        # srial.send(send_data)
+        srial.send(f"{COMMAND} {send_data}\r\n".encode('utf-8'))
         print('end of sending')
     pass
 

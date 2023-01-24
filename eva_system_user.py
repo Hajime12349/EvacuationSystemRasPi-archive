@@ -20,22 +20,20 @@ class MenuScreen(Screen):
     def recvData(self):
         # @check
         # 別スレッドで走らせる必要がありそう。
-        # sc = SrialComm()
-        # PORTNAME='COM5'
-        # sc.open(PORTNAME)
+        sc = SrialComm()
+        PORTNAME='COM5'
+        sc.open(PORTNAME)
         while(1):
             res, bdata = "test","data".encode()
-            # res,bdata = sc.recv(5)
+            res,bdata = sc.recv(5)
             # 末尾が:endかどうか
-            print(res,bdata)
-            # @check
-            # :endはバイナリでくるからそっちで判定<-これでよさそう
-            if bdata[-4:]==";end".encode():
-                # @check
-                # ここで復元する
-                data = bytes.fromhex(bdata).decode('shift_jis')
-                print(res,data)
+            if bdata[-10:]==b'3b656e64\r\n':
+                # print(res,data)
+                bdata = bdata.split()[2]
+                data = bytes.fromhex(bdata.decode('utf-8')).decode('shift_jis')
+                print(data)
                 self.applyData(data)
+            time.sleep(0.1)
 
     
     def applyData(self,data):
