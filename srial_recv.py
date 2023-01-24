@@ -7,6 +7,7 @@ if __name__=='__main__':
     sc.open(PORTNAME)
     while(1):
         res,data = sc.recv(5)
-        if data[len(data)-4:-1]==":end":
+        # 末尾が:endかどうか
+        if data[-4:]==":end":
             print(res,data)
         time.sleep(0.1)
