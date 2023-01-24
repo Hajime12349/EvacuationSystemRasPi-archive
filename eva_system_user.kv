@@ -85,10 +85,9 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            
                 
             Label:
-                id:'title'
+                id: title
                 text:'タイトル'
                 font_size: 5.4*5 
                 size_hint_y: 0.3
@@ -105,7 +104,7 @@
                         pos: self.pos
                         size: self.size
                 Label:
-                    id:'content'
+                    id: content
                     text_size: self.size
                     text:'内容'
                     halign: 'left'
@@ -128,8 +127,13 @@
                 RoundedButton:
                     text:"履歴"
                     size_hint: 0.2,0.7
-                    pos_hint:{'center_x':0.5, 'center_y':0.5}
+                    pos_hint:{'center_x':0.7, 'center_y':0.5}
                     on_press: root.manager.current = 'userHistory'
+                RoundedButton:
+                    text:"受信する"
+                    size_hint: 0.2,0.7
+                    pos_hint:{'center_x':0.3, 'center_y':0.5}
+                    on_press: root.on_press_recvData()
 
 #ユーザ履歴画面
 <UserHistoryScreen>:

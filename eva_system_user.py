@@ -13,43 +13,48 @@ from kivy.uix.dropdown import DropDown
 from Utils.srial_comm import SrialComm
 import time
 
+
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
     
-    def recvData(self):
+    def on_press_recvData(self):
         # @check
         # 別スレッドで走らせる必要がありそう。
         sc = SrialComm()
         PORTNAME='COM5'
+        # ms = MenuScreen()
         sc.open(PORTNAME)
+        # COMMAND='tcps 2001:db8::34'
+        # contents = 'date;type;level;area;detail;end'.encode('shift_jis').hex()
+        # res, bdata = "test",f"{COMMAND} {contents}\r\n".encode('utf-8')
         while(1):
-            res, bdata = "test","data".encode()
-            res,bdata = sc.recv(5)
+            res, bdata = sc.recv(5)
             # 末尾が:endかどうか
             if bdata[-10:]==b'3b656e64\r\n':
                 # print(res,data)
                 bdata = bdata.split()[2]
+                print(bdata)
                 data = bytes.fromhex(bdata.decode('utf-8')).decode('shift_jis')
                 print(data)
                 self.applyData(data)
+                break
             time.sleep(0.1)
-
     
     def applyData(self,data):
         # データの抽出と加工↓
         # test data------------------
-        data = "date;type;level;area;detail;end"
+        # data = "date;type;level;area;detail;end"
         dataList = data.split(";")
         # test data------------------
         
         # @check
         # 文章は要検討（的場に相談）
-        title = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
-        content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n詳細は、{dataList[4]}"
+        title_content = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
+        content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n詳細は、{dataList[4]}"
         # データの抽出と加工↑
-        self.ids.title.text = title
-        self.ids.content.text = content
+        self.ids['title'].text = title_content
+        self.ids['content'].text = content_content
     
 
 class UserHistoryScreen(Screen):
@@ -78,4 +83,12 @@ class SystemInit(App):
 if __name__ == '__main__':
     Builder.load_file('./eva_system_user.kv')
     Window.size=(197*5,110*5)
+    # マルチスレッドで実行
+    # t = threading.Thread(target=recvData,args=())
+    # main_t = threading.Thread(target=SystemInit().run,args=())
+    # t.start()
+    # main_t.start()
+    # t.join()
+    # main_t.join()
+    # print(threading.current_thread().name)
     SystemInit().run()
