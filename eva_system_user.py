@@ -11,11 +11,42 @@ from kivy.graphics import Color,RoundedRectangle
 from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.dropdown import DropDown
 from Utils.srial_comm import SrialComm
+import time
 
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+    
+    def recvData(self):
+        # 別スレッドで走らせる必要がありそう。
+        # sc = SrialComm()
+        # PORTNAME='COM5'
+        # sc.open(PORTNAME)
+        while(1):
+            res, data = "test","data"
+            # res,data = sc.recv(5)
+            # 末尾が:endかどうか
+            print(res,data)
+            # @check
+            # :endはバイナリでくるからそっちで判定
+            if data[-4:]==":end":
+                # @check
+                # ここで復元する
+                print(res,data)
+            time.sleep(0.1)
 
+    
+    def applyData(self):
+        # データの抽出と加工↓
+        # data = function()
+        data = "date:type:level:area:detail:end"
+        dataList = data.split(":")
+        # 文章は要検討（的場に相談）
+        title = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
+        content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n{dataList[4]}"
+        # データの抽出と加工↑
+        self.ids.title.text = ''
+        self.ids.content.text = ''
     
 
 class UserHistoryScreen(Screen):
