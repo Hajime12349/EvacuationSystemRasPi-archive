@@ -49,7 +49,7 @@ class SrialComm:
                 # 受信データ追加
                 self.recvData.extend(buff)
                 # (仮)¥nを受信済なら成功とする
-                print("recvData:",self.recvData)
+                # print("recvData:",self.recvData)
                 if (self.recvData.find(b'\r\n')) >= 0:
                     # データ送受信停止して成功とする
                     result = True

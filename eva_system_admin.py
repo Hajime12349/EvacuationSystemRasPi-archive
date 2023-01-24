@@ -23,7 +23,7 @@ def generate_send_data(
     ):
 
     #ser=srial.Serial()
-    send_data_str=f'{date_str}:{type_num}:{level_num}:{area_num}:{detail}:end'
+    send_data_str=f'{date_str};{type_num};{level_num};{area_num};{detail};end'
     #send_data_bin=send_data_str.encode('shift_jis')
     #ser.write(send_data_bin)
     return send_data_str
