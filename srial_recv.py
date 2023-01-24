@@ -8,11 +8,7 @@ if __name__=='__main__':
     while(1):
         res,bdata = sc.recv(5)
         # data = "date;type;level;area;detail;end".encode()
-        # 末尾が:endかどうか バイナリで判別する必要があるか検証
-        print(bdata[-10:])
-        # if bdata[-4:]==";end\r\n".encode():
         if bdata[-10:]==b'3b656e64\r\n':
-        # if bdata.hex()[-8:]=='3b656e64':
             # print(res,data)
             bdata = bdata.split()[2]
             data = bdata.decode('utf-8')
