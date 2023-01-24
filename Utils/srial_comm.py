@@ -70,8 +70,8 @@ class SrialComm:
         self.event.set()
 
     # シリルポートオープン
-    def open(self):
-        tty='COM5'
+    def open(self,PORTNAME):
+        tty=PORTNAME
         baud='115200'
         comm=None
         try:
