@@ -71,10 +71,10 @@ class SampleComm:
         try:
             self.comm = serial.Serial(tty, baud, timeout=0.1)
             self.isPortOpen = True
-            print("try")
+            print("send")
         except Exception as e:
             self.isPortOpen = False
-            print("exc")
+            print("exception")
 
         return self.isPortOpen
 
@@ -88,18 +88,21 @@ class SampleComm:
 if __name__ == "__main__":
     # シリアルを開く
     comm = SampleComm()
-    PORTNAME='COM5'
+    PORTNAME='COM3'
     comm.open(PORTNAME, '115200')
     COMMAND='tcps 2001:db8::34'
     # COMMAND='reset'
     # データ送信
-    comm.send(f"{COMMAND} 11\r\n".encode('utf-8'))
+    contents = 'テスト;now;end'.encode('shift_jis').hex()
+    print(contents)
+    # tcps 2001:db8::34 11;end
+    comm.send(f"{COMMAND} {contents}\r\n".encode('utf-8'))
     # comm.send(f"{COMMAND}\r\n".encode('utf-8'))
-    
+    print(bytes.fromhex(contents).decode('shift_jis'))
     # データ受信(タイムアウト=10sec)
-    result, data = comm.recv(10)
-    print(result)
-    print(data)
+    # result, data = comm.recv(10)
+    # print(result)
+    # print(data)
 
     # シリアルを閉じる
     comm.close()

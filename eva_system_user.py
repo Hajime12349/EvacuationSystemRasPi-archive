@@ -29,14 +29,13 @@ class MenuScreen(Screen):
             # 末尾が:endかどうか
             print(res,bdata)
             # @check
-            # :endはバイナリでくるからそっちで判定
+            # :endはバイナリでくるからそっちで判定<-これでよさそう
             if bdata[-4:]==";end".encode():
                 # @check
                 # ここで復元する
-                data = bdata.decode()
+                data = bytes.fromhex(bdata).decode('shift_jis')
                 print(res,data)
                 self.applyData(data)
-            time.sleep(0.1)
 
     
     def applyData(self,data):
