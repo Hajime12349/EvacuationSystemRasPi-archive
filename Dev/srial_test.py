@@ -95,7 +95,7 @@ if __name__ == "__main__":
     # データ送信
     comm.send(f"{COMMAND} 11\r\n".encode('utf-8'))
     # comm.send(f"{COMMAND}\r\n".encode('utf-8'))
-    \
+    
     # データ受信(タイムアウト=10sec)
     result, data = comm.recv(10)
     print(result)
