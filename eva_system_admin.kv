@@ -275,26 +275,50 @@
         ColorLabel:
             size_hint_y: 0.05
 
+        # ここにプレビュー画面
         BoxLayout:
-            orientation:'horizontal'
+            orientation: 'vertical'
+            size: root.size
+            padding:40,0,40,0
+            # size_hint_y: 2.5
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Label:
+                text: '送信プレビュー'
+                font_size: 5.4*7 
+                size_hint_y: 0.2
+                color:(0,0,0,1)
+                
+            Label:
+                id: title
+                text:'タイトル'
+                font_size: 5.4*8 
+                size_hint_y: 0.3
+                color:(0,0,0,1)
+            
             BoxLayout:
-                padding:10,10,10,10
+                orientation:'vertical'
+                size_hint_y: 1
+                padding: 10,10,10,10
+                canvas.before:
+                    Color:
+                        rgba: 0,0,0,0.15
+                    Rectangle:
+                        pos: self.pos
+                        size: self.size
                 Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
-            BoxLayout:
-                padding:10,10,10,10
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+                    id: content
+                    text_size: self.size
+                    text:'内容'
+                    halign: 'left'
+                    valign: 'top'
+                    font_size: 5.4*7
+                    size_hint_y: 1
+                    color:(0,0,0,1)
 
         FloatLayout:
             size_hint_y:0.1
@@ -313,7 +337,7 @@
                 on_release:root.manager.current = 'input'
 
             RoundedButton:
-                text:"確認"
+                text:"送信"
                 size_hint: 0.1,0.8
                 pos_hint:{'center_x':0.9, 'center_y':0.5}
 
