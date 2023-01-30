@@ -108,20 +108,24 @@
 
         ColorLabel:
             size_hint_y: 0.05
-            text:"hello"
+        BoxLayout:
+            orientation:"horizontal"
+            FloatLayout:
+                RoundedButton:
+                    text:"通報"
+                    size_hint: 0.6,0.24
+                    pos_hint:{'center_x':0.5, 'center_y':0.75}
+                    on_release:root.manager.current = 'input'
 
-        FloatLayout:
-            RoundedButton:
-                text:"通報"
-                size_hint: 0.3,0.24
-                pos_hint:{'center_x':0.25, 'center_y':0.75}
-                on_release:root.manager.current = 'input'
-
-            RoundedButton:
-                text:"履歴"
-                size_hint: 0.3,0.24
-                pos_hint:{'center_x':0.25, 'center_y':0.25}
-                on_release: root.manager.current = 'history'
+                RoundedButton:
+                    text:"履歴"
+                    size_hint: 0.6,0.24
+                    pos_hint:{'center_x':0.5, 'center_y':0.25}
+                    on_release: root.manager.current = 'history'
+            BoxLayout:
+                padding:10,10,10,10
+                NoneLabel:
+                    text:"災害状況（地図）"
 
 #通報入力画面
 <InputScreen>:
@@ -293,11 +297,6 @@
                 Rectangle:
                     pos: self.pos
                     size: self.size
-            Label:
-                text: '送信プレビュー'
-                font_size: 5.4*7 
-                size_hint_y: 0.2
-                color:(0,0,0,1)
                 
             Label:
                 id: title
@@ -342,6 +341,11 @@
 
                 on_release:root.manager.current = 'input'
 
+            Label:
+                text: '送信プレビュー'
+                font_size: 5.4*7 
+                color:(0,0,0,1)
+
             RoundedButton:
                 text:"送信"
                 size_hint: 0.1,0.8
@@ -376,13 +380,8 @@
         BoxLayout:
             BoxLayout:
                 padding:10,10,10,10
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+                NoneLabel:
+                    text:"送信完了しました"
 
         FloatLayout:
             size_hint_y:0.1
