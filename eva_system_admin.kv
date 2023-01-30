@@ -82,7 +82,7 @@
         background_normal:''
         background_down:''
         color: 0 , 0 , 0 , 1
-        text:"Click here and you'll see a preview"
+        text:""
         #if down #cccccc else #7f7f7f
         background_color:(0.8, 0.8 , 0.8 , 1) if self.state!='down' else (0.5,0.5,0.5, 1)
         canvas.before:
@@ -447,13 +447,8 @@
                         id:G10
             BoxLayout:
                 padding:10,10,10,10
-                Label:
-                    canvas.before:
-                        Color:
-                            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
-                        Rectangle:
-                            pos: self.pos
-                            size: self.size
+                NoneLabel:
+                    text:"表示したい履歴を選択してください。"
 
         FloatLayout:
             size_hint_y:0.1
