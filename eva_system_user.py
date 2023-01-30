@@ -22,7 +22,7 @@ class MenuScreen(Screen):
         # @check
         # 別スレッドで走らせる必要がありそう。
         sc = SrialComm()
-        PORTNAME='COM5'
+        PORTNAME='/dev/ttyUSB0'
         # ms = MenuScreen()
         sc.open(PORTNAME)
         # COMMAND='tcps 2001:db8::34'
@@ -40,14 +40,14 @@ class MenuScreen(Screen):
                 self.applyData(data)
                 break
             time.sleep(0.1)
-    
+
     def applyData(self,data):
         # データの抽出と加工↓
         # test data------------------
         # data = "date;type;level;area;detail;end"
         dataList = data.split(";")
         # test data------------------
-        
+
         # @check
         # 文章は要検討（的場に相談）
         title_content = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
@@ -55,7 +55,7 @@ class MenuScreen(Screen):
         # データの抽出と加工↑
         self.ids['title'].text = title_content
         self.ids['content'].text = content_content
-    
+
 
 class UserHistoryScreen(Screen):
     pass
