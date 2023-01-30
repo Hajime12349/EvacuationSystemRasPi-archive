@@ -58,6 +58,7 @@
     background_down:''
     color: 0 , 0 , 0 , 1
     font_size: 5.4*5
+    #font_name:'./Utils/BIZ_UDPGothic/BIZUDPGothic-Regular.ttf'
     background_color: (1.0,0.82,0.5, 1) if self.state!='down' else (0.5,0.5,0.5, 1)
     on_press:root.on_press_spinner()
     #min_state_time:1
@@ -120,6 +121,7 @@
                 RoundedButton:
                     text:"履歴"
                     size_hint: 0.6,0.24
+                    #font_name:'./Utils/BIZ_UDPGothic/BIZUDPGothic-Regular.ttf'
                     pos_hint:{'center_x':0.5, 'center_y':0.25}
                     on_release: root.manager.current = 'history'
             BoxLayout:
