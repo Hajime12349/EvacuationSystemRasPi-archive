@@ -94,7 +94,7 @@ if __name__ == '__main__':
     Builder.load_file('./eva_system_user.kv')
     resource_add_path('./Utils/BIZ_UDPGothic')
     LabelBase.register(DEFAULT_FONT, 'BIZUDPGothic-Regular.ttf')
-    Window.size=(197*5,110*5)
+    Window.size=(197,110)
     Window.fullscreen = True
     # マルチスレッドで実行
     # t = threading.Thread(target=recvData,args=())
