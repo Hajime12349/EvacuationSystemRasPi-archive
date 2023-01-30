@@ -1,6 +1,6 @@
 import japanize_kivy
-from kivy.app import App
 
+from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
@@ -55,6 +55,7 @@ class InputScreen(Screen):
         return self.send_data
 
 
+
 class CheckScreen(Screen):
 
     def on_press_send(self):
@@ -80,6 +81,22 @@ class HistoryScreen(Screen):
 
 class ColorLabel(BoxLayout):
     pass
+
+class CustomSpinner(Spinner):
+    pass
+    # saved_value=''
+    def on_press_spinner(self):
+        pass
+    #     if(self.is_list_open):
+    #         self.is_list_open=False
+    #     else:
+
+class SpinnerOption(Button):
+    pass
+
+
+
+
 
 
 

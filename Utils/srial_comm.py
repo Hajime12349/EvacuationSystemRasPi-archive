@@ -46,6 +46,7 @@ class SrialComm:
 
             # 受信データ判定
             if len(buff) > 0:
+                print('receaved')
                 # 受信データ追加
                 self.recvData.extend(buff)
                 # (仮)¥nを受信済なら成功とする
