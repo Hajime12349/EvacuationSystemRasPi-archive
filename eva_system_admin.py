@@ -31,7 +31,14 @@ def generate_send_data(
     #ser.write(send_data_bin)
     return send_data_str
 
-
+# global title_content
+# global content_content
+# title_content=""
+# content_content=""
+class preview(object):
+    def __init__(self,title):
+        self.title = ""
+        # self.content = content
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -70,29 +77,43 @@ class InputScreen(Screen):
         # self.ids['rmarks'].text)
         # print(self.send_data)
         #print(send_data)
-
+        global title_content
+        global content_content
+        # プレビュー用のデータに加工
+        cautionMes=["","逃げる準備をしながら，新しい情報に注意して!","逃げる準備を始めてね!","逃げれそうなら逃げて!","とても危険だから逃げて!","今すぐ安全なところへ逃げて!!"]
+        dataList = send_data.split(";")
+        level = self.get_level_num(dataList[2])
+        title_content = f"{dataList[3]}で{dataList[1]}が起きてます！ レベル：{dataList[2]}"
+        content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n\n{cautionMes[level]}\n\n詳細や追加情報\n\n{dataList[4]}"
+        
+        self.manager.get_screen('check').ids['title'].text = title_content
+        self.manager.get_screen('check').ids['content'].text = content_content
+        
     def get_data(self):
         return self.send_data
+    
+    def get_level_num(self,level_str):
+        level_table= ['危険なし','早期注意情報','警戒レベル2','警戒レベル3','警戒レベル4','警戒レベル5']
+        return level_table.index(level_str)
+        
 
 
 
 class CheckScreen(Screen):
-
+    
     def on_press_send(self):
         # input=InputScreen()
         # print(input.get_data())
         #send_data=input.get_data().encode('shift_jis').hex()
         global send_data
         print(send_data)
+
         send_data=send_data.encode('shift_jis').hex()
 
         srial=SrialComm()
         PORTNAME = 'COM5'
         srial.open(PORTNAME)
         COMMAND='tcps 2001:db8::34'
-        # @check
-        # バイナリに変換しなくても送信可能？また、この場合受信はどんなデータになる？
-        # srial.send(send_data)
         srial.send(f"{COMMAND} {send_data}\r\n".encode('utf-8'))
         print('end of sending')
 
@@ -125,7 +146,7 @@ class SpinnerOption(Button):
 
 
 
-
+pre = preview('')
 
 
 class SystemInit(App):
