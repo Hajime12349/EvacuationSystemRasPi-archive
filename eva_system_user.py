@@ -17,7 +17,7 @@ import time
 class MenuScreen(Screen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-    
+
     def on_press_recvData(self):
         # @check
         # 別スレッドで走らせる必要がありそう。

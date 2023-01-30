@@ -30,7 +30,7 @@
             radius:[18]
 
 
-<SpinnerOption>
+<SpinnerOption@Button>
     background_normal:''
     background_down:''
     #if down e5e5e5 else 7f7f7f
@@ -49,6 +49,9 @@
     color: 0 , 0 , 0 , 1
     #if down b2b2b2 else 7f7f7f
     background_color:(0.7,0.7,0.7, 1) if self.state!='down' else (0.5,0.5,0.5, 1)
+    on_press:root.on_press_spinner()
+    #min_state_time:1
+
 
 <GridRectangle@GridLayout>
     raws:10
@@ -133,58 +136,58 @@
                         pos_hint: {'y': 0.25}
                         text: 'A'
                         values: 'A', 'B', 'C', 'D', 'E'
-                # BoxLayout:
-                #     orientation:'vertical'
-                #     padding:10,0,10,0
-                #     Label:
-                #         text:'災害の種類'
-                #         color:(0,0,0,1)
-                #         size_hint_y:0.05
-                #         font_size: 5.4*5
-                #     CustomSpinner:
-                #         id:type
-                #         pos_hint: {'y': 0.5}
-                #         text: 'A'
-                #         values: 'A', 'B', 'C', 'D', 'E'
-                # BoxLayout:
-                #     orientation:'vertical'
-                #     padding:10,0,10,0
-                #     Label:
-                #         text:'災害のレベル'
-                #         color:(0,0,0,1)
-                #         size_hint_y:0.05
-                #         font_size: 5.4*5
-                #     CustomSpinner:
-                #         id:level
-                #         pos_hint: {'y': 0.5}
-                #         text: 'A'
-                #         values: 'A', 'B', 'C', 'D', 'E'
-                # BoxLayout:
-                #     orientation:'vertical'
-                #     padding:10,0,10,0
-                #     Label:
-                #         text:'対象地域'
-                #         color:(0,0,0,1)
-                #         size_hint_y:0.05
-                #         font_size: 5.4*5
-                #     CustomSpinner:
-                #         id:area
-                #         pos_hint: {'y': 0.75}
-                #         text: 'A'
-                #         values: 'A', 'B', 'C', 'D', 'E'
-                # BoxLayout:
-                #     orientation:'vertical'
-                #     padding:10,0,10,0
-                #     Label:
-                #         text:'備考'
-                #         color:(0,0,0,1)
-                #         size_hint_y:0.05
-                #         font_size: 5.4*5
-                #     CustomSpinner:
-                #         id:rmarks
-                #         pos_hint: {'y': 1}
-                #         text: 'A'
-                #         values: 'A', 'B', 'C', 'D', 'E'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'災害の種類'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:type
+                        pos_hint: {'y': 0.5}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'災害のレベル'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:level
+                        pos_hint: {'y': 0.5}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'対象地域'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:area
+                        pos_hint: {'y': 0.75}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
+                BoxLayout:
+                    orientation:'vertical'
+                    padding:10,0,10,0
+                    Label:
+                        text:'備考'
+                        color:(0,0,0,1)
+                        size_hint_y:0.05
+                        font_size: 5.4*5
+                    CustomSpinner:
+                        id:rmarks
+                        pos_hint: {'y': 1}
+                        text: 'A'
+                        values: 'A', 'B', 'C', 'D', 'E'
 
             BoxLayout:
                 BoxLayout:

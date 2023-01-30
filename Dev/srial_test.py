@@ -85,10 +85,10 @@ class SampleComm:
             self.comm.close()
         self.isPortOpen = False
 
-if __name__ == "__main__":
+def test():
     # シリアルを開く
     comm = SampleComm()
-    PORTNAME='COM3'
+    PORTNAME='COM5'
     comm.open(PORTNAME, '115200')
     COMMAND='tcps 2001:db8::34'
     # COMMAND='reset'
@@ -106,3 +106,6 @@ if __name__ == "__main__":
 
     # シリアルを閉じる
     comm.close()
+
+if __name__ == "__main__":
+    test()

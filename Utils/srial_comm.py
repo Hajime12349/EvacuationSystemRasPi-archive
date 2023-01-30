@@ -60,10 +60,8 @@ class SrialComm:
         return (result, self.recvData)
 
     # データ送信
-    def send(self, str_data):
-        COMMAND='tcps 2001:db8::34'
-        bin_data=f"{COMMAND} {str_data}\r\n".encode('shift_jis')
-        self.comm.write(bin_data)
+    def send(self, data):
+        self.comm.write(data)
 
     # データ送受信停止
     def stop(self):

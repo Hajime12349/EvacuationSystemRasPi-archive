@@ -1,6 +1,6 @@
 import japanize_kivy
-from kivy.app import App
 
+from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.widget import Widget
 from kivy.uix.boxlayout import BoxLayout
@@ -49,16 +49,19 @@ class InputScreen(Screen):
         self.ids['level'].text,
         self.ids['area'].text,
         self.ids['rmarks'].text)
-        print(self.send_data)
+        #print(self.send_data)
 
     def get_data(self):
         return self.send_data
+
 
 
 class CheckScreen(Screen):
 
     def on_press_send(self):
         input=InputScreen()
+        input.on_press_confirm()
+        print(input.get_data())
         send_data=input.get_data().encode('shift_jis').hex()
 
         srial=SrialComm()
@@ -70,7 +73,8 @@ class CheckScreen(Screen):
         # srial.send(send_data)
         srial.send(f"{COMMAND} {send_data}\r\n".encode('utf-8'))
         print('end of sending')
-    pass
+
+
 
 class ResultScreen(Screen):
     pass
@@ -80,6 +84,22 @@ class HistoryScreen(Screen):
 
 class ColorLabel(BoxLayout):
     pass
+
+class CustomSpinner(Spinner):
+    pass
+    # saved_value=''
+    def on_press_spinner(self):
+        pass
+    #     if(self.is_list_open):
+    #         self.is_list_open=False
+    #     else:
+
+class SpinnerOption(Button):
+    pass
+
+
+
+
 
 
 
