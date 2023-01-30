@@ -142,9 +142,18 @@
                         color:(0,0,0,1)
                         size_hint_y:0.05
                         font_size: 5.4*5
-                    CustomTextInput:
-                        id:date_time
-                        text:''
+                    BoxLayout:
+                        orientation:'horizontal'
+                        spacing: '20dp'
+                        size_hint_y: 0.05
+                        CustomTextInput:
+                            id:date
+                            size_hint_y:1
+                            text:''
+                        CustomTextInput:
+                            id:time
+                            size_hint_y:1
+                            text:''
                     # CustomSpinner:
                     #     id:date_time
                     #     pos_hint: {'y': 0.25}

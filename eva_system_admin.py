@@ -41,22 +41,33 @@ class MenuScreen(Screen):
     # def on_press_history(self):
     #     print('history')
 
+send_data=''
+
 class InputScreen(Screen):
-    send_data=''
     def __init__(self, **kwargs):
         super(InputScreen, self).__init__(**kwargs)
         dt_now = datetime.datetime.now()
-        str_now=dt_now.strftime('%Y/%m/%d %H:%M')
-        self.ids['date_time'].text=str_now
+        str_date=dt_now.strftime('%Y/%m/%d')
+        str_time=dt_now.strftime('%H:%M')
+        self.ids['date'].text=str_date
+        self.ids['time'].text=str_time
 
     def on_press_confirm(self):
-        self.send_data=generate_send_data(
-        self.ids['date_time'].text,
+        global send_data
+        send_data=generate_send_data(
+        self.ids['date'].text+' '+self.ids['time'].text,
         self.ids['type'].text,
         self.ids['level'].text,
         self.ids['area'].text,
         self.ids['rmarks'].text)
-        #print(self.send_data)
+        # self.send_data=generate_send_data(
+        # self.ids['date'].text+' '+self.ids['time'].text,
+        # self.ids['type'].text,
+        # self.ids['level'].text,
+        # self.ids['area'].text,
+        # self.ids['rmarks'].text)
+        # print(self.send_data)
+        #print(send_data)
 
     def get_data(self):
         return self.send_data
@@ -66,10 +77,12 @@ class InputScreen(Screen):
 class CheckScreen(Screen):
 
     def on_press_send(self):
-        input=InputScreen()
-        input.on_press_confirm()
-        print(input.get_data())
-        send_data=input.get_data().encode('shift_jis').hex()
+        # input=InputScreen()
+        # print(input.get_data())
+        #send_data=input.get_data().encode('shift_jis').hex()
+        global send_data
+        print(send_data)
+        send_data=send_data.encode('shift_jis').hex()
 
         srial=SrialComm()
         PORTNAME = 'COM5'
