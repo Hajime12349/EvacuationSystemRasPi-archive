@@ -36,6 +36,7 @@
     #if down e5e5e5 else 7f7f7f
     background_color: (0.9,0.9,0.9, 1) if self.state!='down' else (0.5,0.5,0.5, 1)
     color:0,0,0,1
+    font_size: 5.4*5
     canvas.before:
         Color:
             rgba: 0, 0, 0, 1
@@ -47,6 +48,7 @@
     background_normal:''
     background_down:''
     color: 0 , 0 , 0 , 1
+    font_size: 5.4*5
     #if down b2b2b2 else 7f7f7f
     background_color:(0.7,0.7,0.7, 1) if self.state!='down' else (0.5,0.5,0.5, 1)
     on_press:root.on_press_spinner()
@@ -147,8 +149,8 @@
                     CustomSpinner:
                         id:type
                         pos_hint: {'y': 0.5}
-                        text: 'A'
-                        values: 'A', 'B', 'C', 'D', 'E'
+                        text: '大雨'
+                        values: '大雨','土砂災害','高潮','洪水','地震','津波','暴風・強風','波浪','雷'
                 BoxLayout:
                     orientation:'vertical'
                     padding:10,0,10,0
@@ -160,8 +162,8 @@
                     CustomSpinner:
                         id:level
                         pos_hint: {'y': 0.5}
-                        text: 'A'
-                        values: 'A', 'B', 'C', 'D', 'E'
+                        text: '早期注意情報'
+                        values:'危険なし','早期注意情報','警戒レベル2','警戒レベル3','警戒レベル4','警戒レベル5'
                 BoxLayout:
                     orientation:'vertical'
                     padding:10,0,10,0
@@ -173,8 +175,8 @@
                     CustomSpinner:
                         id:area
                         pos_hint: {'y': 0.75}
-                        text: 'A'
-                        values: 'A', 'B', 'C', 'D', 'E'
+                        text: '大島地区'
+                        values: '大島地区','久賀地区','東和地区','橘地区','大島','久賀','東和','橘'
                 BoxLayout:
                     orientation:'vertical'
                     padding:10,0,10,0

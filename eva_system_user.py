@@ -50,8 +50,15 @@ class MenuScreen(Screen):
 
         # @check
         # 文章は要検討（的場に相談）
-        title_content = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
-        content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n詳細は、{dataList[4]}"
+        # レベルによってメッセージ変えるみたいなの，一応思いついたので書いただけです
+        cautionMes=["","逃げる準備をしながら，新しい情報に注意して!","逃げる準備を始めてね!","逃げれそうなら逃げて!","とても危険だから逃げて!","今すぐ安全なところへ逃げて!!"]
+
+        title_content = f"{dataList[3]}で{dataList[1]}が起きてます！ レベル：{dataList[2]}"
+        #content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\nとても危険だから逃げて!\n詳細や追加情報\n{dataList[4]}"
+        content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n{cautionMes[dataList[2]]}\n詳細や追加情報\n{dataList[4]}"
+
+        # title_content = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
+        # content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n詳細は、{dataList[4]}"
         # データの抽出と加工↑
         self.ids['title'].text = title_content
         self.ids['content'].text = content_content
@@ -70,7 +77,7 @@ class SystemInit(App):
         # @check
         # 何も考えてなかったけど変えた方がいいかも
         self.title = 'Evacuation System'
-        
+
 
     def build(self):
         sm = ScreenManager(transition=NoTransition())
