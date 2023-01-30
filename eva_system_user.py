@@ -55,7 +55,7 @@ class MenuScreen(Screen):
 
         title_content = f"{dataList[3]}で{dataList[1]}が起きてます！ レベル：{dataList[2]}"
         #content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\nとても危険だから逃げて!\n詳細や追加情報\n{dataList[4]}"
-        content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n{cautionMes[dataList[2]]}\n詳細や追加情報\n{dataList[4]}"
+        content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n\n{cautionMes[dataList[2]]}\n\n詳細や追加情報\n\n{dataList[4]}"
 
         # title_content = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
         # content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n詳細は、{dataList[4]}"
