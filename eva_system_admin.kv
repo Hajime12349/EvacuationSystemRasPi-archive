@@ -10,6 +10,16 @@
             pos: self.pos
             size: self.size
 
+<NoneLabel@Label>
+    font_size: 5.4*5
+    color:0,0,0,1
+    canvas.before:
+        Color:
+            rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
 <RoundedButton@Button>
     background_color:(0,0,0,0)
     background_normal:''
@@ -98,6 +108,7 @@
 
         ColorLabel:
             size_hint_y: 0.05
+            text:"hello"
 
         FloatLayout:
             RoundedButton:
@@ -218,13 +229,8 @@
             BoxLayout:
                 BoxLayout:
                     padding:10,10,10,10
-                    Label:
-                        canvas.before:
-                            Color:
-                                rgba: 0.8, 0.8 , 0.8 , 1 #cccccc
-                            Rectangle:
-                                pos: self.pos
-                                size: self.size
+                    NoneLabel:
+                        text:"テキストプレビュー"
 
         FloatLayout:
             size_hint_y:0.1
