@@ -83,6 +83,7 @@ class SystemInit(App):
 if __name__ == '__main__':
     Builder.load_file('./eva_system_user.kv')
     Window.size=(197*5,110*5)
+    Window.fullscreen = True
     # マルチスレッドで実行
     # t = threading.Thread(target=recvData,args=())
     # main_t = threading.Thread(target=SystemInit().run,args=())

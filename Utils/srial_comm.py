@@ -62,7 +62,10 @@ class SrialComm:
 
     # データ送信
     def send(self, data):
-        self.comm.write(data)
+        if self.isPortOpen:
+            self.comm.write(data)
+        else:
+            print("Not connected")
 
     # データ送受信停止
     def stop(self):
