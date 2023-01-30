@@ -48,7 +48,7 @@
     background_down:''
     color: 0 , 0 , 0 , 1
     font_size: 5.4*5
-    background_color: (1.0,0.925,0.8, 1) if self.state!='down' else (0.5,0.5,0.5, 1)
+    background_color: (1.0,0.82,0.5, 1) if self.state!='down' else (0.5,0.5,0.5, 1)
     on_press:root.on_press_spinner()
     #min_state_time:1
 
@@ -57,7 +57,7 @@
     background_normal:''
     color: 0 , 0 , 0 , 1
     font_size: 5.4*5
-    background_color:(1.0,0.925,0.8, 1)
+    background_color:(1.0,0.82,0.5, 1)
     cursor_color:(0,0,0, 1)
     multiline:False
     halign:'center'
@@ -208,7 +208,7 @@
                         font_size: 5.4*5
                     CustomTextInput:
                         id:rmarks
-                        text:'追加情報はありません。'
+                        text:''
                     # CustomSpinner:
                     #     id:rmarks
                     #     pos_hint: {'y': 1}
