@@ -1,4 +1,5 @@
 import japanize_kivy
+import datetime
 
 from kivy.app import App
 from kivy.core.window import Window
@@ -42,6 +43,12 @@ class MenuScreen(Screen):
 
 class InputScreen(Screen):
     send_data=''
+    def __init__(self, **kwargs):
+        super(InputScreen, self).__init__(**kwargs)
+        dt_now = datetime.datetime.now()
+        str_now=dt_now.strftime('%Y/%m/%d %H:%M')
+        self.ids['date_time'].text=str_now
+
     def on_press_confirm(self):
         self.send_data=generate_send_data(
         self.ids['date_time'].text,
