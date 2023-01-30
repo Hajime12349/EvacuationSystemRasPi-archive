@@ -95,6 +95,7 @@ if __name__ == '__main__':
     resource_add_path('./Utils/BIZ_UDPGothic')
     LabelBase.register(DEFAULT_FONT, 'BIZUDPGothic-Regular.ttf')
     Window.size=(197,110)
+    #Window.size=(192,108)
     Window.fullscreen = True
     # マルチスレッドで実行
     # t = threading.Thread(target=recvData,args=())
