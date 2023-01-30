@@ -1,4 +1,4 @@
-import japanize_kivy
+#import japanize_kivy
 from kivy.app import App
 
 from kivy.core.window import Window
@@ -10,6 +10,9 @@ from kivy.uix.button import Button
 from kivy.graphics import Color,RoundedRectangle
 from kivy.uix.spinner import Spinner, SpinnerOption
 from kivy.uix.dropdown import DropDown
+from kivy.resources import resource_add_path
+from kivy.core.text import LabelBase, DEFAULT_FONT
+
 from Utils.srial_comm import SrialComm
 import time
 
@@ -89,6 +92,8 @@ class SystemInit(App):
 # メインの定義
 if __name__ == '__main__':
     Builder.load_file('./eva_system_user.kv')
+    resource_add_path('./Utils/BIZ_UDPGothic')
+    LabelBase.register(DEFAULT_FONT, 'BIZUDPGothic-Regular.ttf')
     Window.size=(197*5,110*5)
     Window.fullscreen = True
     # マルチスレッドで実行
