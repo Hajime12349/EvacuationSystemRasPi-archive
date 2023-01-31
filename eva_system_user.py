@@ -31,6 +31,7 @@ class MenuScreen(Screen):
         # COMMAND='tcps 2001:db8::34'
         # contents = 'date;type;level;area;detail;end'.encode('shift_jis').hex()
         # res, bdata = "test",f"{COMMAND} {contents}\r\n".encode('utf-8')
+        self.ids['recvbtn'].text = "受信中"
         while(1):
             res, bdata = sc.recv(5)
             # 末尾が:endかどうか
@@ -43,6 +44,7 @@ class MenuScreen(Screen):
                 self.applyData(data)
                 break
             time.sleep(0.1)
+        self.ids['recvbtn'].text = "受信する"
 
     def applyData(self,data):
         # データの抽出と加工↓
@@ -55,16 +57,20 @@ class MenuScreen(Screen):
         # 文章は要検討（的場に相談）
         # レベルによってメッセージ変えるみたいなの，一応思いついたので書いただけです
         cautionMes=["","逃げる準備をしながら，新しい情報に注意して!","逃げる準備を始めてね!","逃げれそうなら逃げて!","とても危険だから逃げて!","今すぐ安全なところへ逃げて!!"]
-
+        level = self.get_level_num(dataList[2])
         title_content = f"{dataList[3]}で{dataList[1]}が起きてます！ レベル：{dataList[2]}"
         #content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\nとても危険だから逃げて!\n詳細や追加情報\n{dataList[4]}"
-        content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n\n{cautionMes[dataList[2]]}\n\n詳細や追加情報\n\n{dataList[4]}"
+        content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n\n{cautionMes[level]}\n\n詳細や追加情報\n\n{dataList[4]}"
 
         # title_content = f"{dataList[3]}で{dataList[1]}が発生！ レベル{dataList[2]}"
         # content_content = f"{dataList[0]}に{dataList[3]}で{dataList[1]}が発生しました。\n危険ですので直ちに避難してください\n詳細は、{dataList[4]}"
         # データの抽出と加工↑
         self.ids['title'].text = title_content
         self.ids['content'].text = content_content
+        
+    def get_level_num(self,level_str):
+        level_table= ['危険なし','早期注意情報','警戒レベル2','警戒レベル3','警戒レベル4','警戒レベル5']
+        return level_table.index(level_str)
 
 
 class UserHistoryScreen(Screen):
