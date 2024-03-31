@@ -39,11 +39,6 @@
 ### 2022/12/06
 + Devフォルダ内にシリアル通信のテストコードを置いてます
 
-## To Do
-+ 送信プレビュー等の作成
-+ UIの改善（バリアフリーに）
-
-
 ## Requirement
 - Python 3.9.x
 - requirements.txt
