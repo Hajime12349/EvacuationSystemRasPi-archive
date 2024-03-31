@@ -1,7 +1,9 @@
 ## システム説明
 　本システムは町役員がアプリケーションに地区・立地ごとに必要な災害情報のテキストを入力し、各世帯にある防災ラジオに付属したシステムに送信して、ディスプレイに情報を表示することで、ラジオが聞き取りづらい高齢者の早期避難を促します。
+ 
 ![タイトルなし](https://github.com/Hajime12349/EvacuationSystemRasPi-archive/assets/51946324/c5145781-8b33-4906-be8f-fcae313e7af6)
 ![2](https://github.com/Hajime12349/EvacuationSystemRasPi-archive/assets/51946324/9805fceb-06f5-4e64-84c7-1b6aa71c357f)
+
 ## log
 ### 2023/01/31
 + 最終版
